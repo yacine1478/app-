@@ -40,3 +40,6 @@ val bebasfamilly = FontFamily(
 val bigNoodle = FontFamily(
     Font(R.font.big_noodle_titling,FontWeight.Normal)
 )
+val HelveticaFamilly = FontFamily(
+    Font(R.font.helvetica,FontWeight.Normal)
+)
