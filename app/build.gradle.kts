@@ -1,14 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.google.services)
 }
 
 android {
-    namespace = "com.example.sougna"
-    compileSdk = 34
+    compileSdk = 34  // This replaces compileSdkVersion
+    namespace = "com.example.MyApplication"
 
     defaultConfig {
-        applicationId = "com.example.sougna"
+        applicationId = "com.example.MyApplication"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -42,14 +44,15 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
-    packaging {
+    packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
-
 dependencies {
+
+
     // Core AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,7 +64,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-
+    //FACBOOK
     // Navigation
     implementation(libs.androidx.navigation.compose)
 

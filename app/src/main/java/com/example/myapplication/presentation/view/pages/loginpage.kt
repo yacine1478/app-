@@ -227,7 +227,7 @@ fun login () {
                 Column(
 
                 ) {
-                    Spacer(modifier = Modifier.height(250.dp))
+                    Spacer(modifier = Modifier.height(165.dp))
                     Button(
                         onClick = { /* Handle sign-in logic here */ },
                         modifier = Modifier
@@ -256,7 +256,7 @@ fun login () {
                     //second button ///////////////////
 
 
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(85.dp))
                     Button(
                         onClick = { /* Handle sign-in logic here */ },
                         modifier = Modifier
@@ -308,58 +308,6 @@ fun login () {
 
                     }
 
-
-                    Spacer(modifier = Modifier.height(25.dp))
-                    Button(
-                        onClick = { /* Handle sign-in logic here */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp)
-                            .padding(horizontal = 10.dp)
-                            .shadow(
-                                elevation = 10.dp,
-                                shape = RoundedCornerShape(
-                                    topStart = 50.dp,
-                                    topEnd = 50.dp,
-                                    bottomStart = 50.dp,
-                                    bottomEnd = 50.dp
-                                )
-                            ),
-                        shape = RoundedCornerShape(
-                            topStart = 50.dp,
-                            topEnd = 50.dp,
-                            bottomStart = 50.dp,
-                            bottomEnd = 50.dp
-                        ),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White,
-                        ),
-
-                        ) {
-                        Row(
-                            modifier = Modifier.padding(start = 0.dp),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.facbook,),
-                                contentDescription = "Facbook icon",
-                                modifier = Modifier
-                                    .size(40.dp),
-                                tint = Color.Unspecified
-
-                            )
-                            Spacer(Modifier.width(15.dp))
-                            Text(
-                                "SIGN IN WITH FACBOOK ",
-                                fontFamily = bigNoodle,
-                                fontSize = 34.sp,
-                                color = Color.Black
-                            )
-                        }
-
-                    }
 
 
                 }
