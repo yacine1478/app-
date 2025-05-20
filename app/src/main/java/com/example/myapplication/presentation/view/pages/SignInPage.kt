@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -59,9 +60,12 @@ import com.example.MyApplication.R
 import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun login () {
+fun sign () {
     val email = remember { mutableStateOf("") }
     val pass = remember { mutableStateOf("") }
+    val username = remember { mutableStateOf("") }
+    val confirmpass = remember { mutableStateOf("") }
+    val isPasswordVisible = remember { mutableStateOf(true) }
 
 
     Column(
@@ -76,7 +80,7 @@ fun login () {
                 .padding(20.dp)
         ) {
             Text(
-                text = "LOGIN",
+                text = "SIGN IN",
                 color = Color(0xFFC7C1C1),
                 fontSize = 75.sp,
                 fontFamily = bigNoodle,
@@ -102,7 +106,7 @@ fun login () {
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize()
-                        .padding(top = 66.dp),
+                        .padding(top = 70.dp),
                     contentAlignment = Alignment.TopStart
                 ) {
 
@@ -111,11 +115,11 @@ fun login () {
 
 
                     OutlinedTextField(
-                        value = email.value,
-                        onValueChange = { email.value = it },
+                        value = username.value,
+                        onValueChange = { username.value = it },
                         label = {
                             Text(
-                                text = "EMAIL",
+                                text = "USER NAME",
                                 fontFamily = HelveticaFamilly,
                                 // Optional label color
                             )
@@ -149,7 +153,7 @@ fun login () {
                         ), // Rounded corners
                         leadingIcon = {
                             Icon(
-                                imageVector = Icons.Default.Email,
+                                imageVector = Icons.Default.AccountCircle,
                                 contentDescription = "Email icon",
 
                                 )
@@ -162,7 +166,7 @@ fun login () {
                 // pass field.................................................
 
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 Box(
                     modifier = Modifier.fillMaxSize()
                         .height(65.dp)
@@ -174,11 +178,11 @@ fun login () {
                             .padding(horizontal = 10.dp)
                     ) {
                         OutlinedTextField(
-                            value = pass.value,
-                            onValueChange = { pass.value = it },
+                            value = email.value,
+                            onValueChange = { email.value = it },
                             label = {
                                 Text(
-                                    text = "PASSWORD",
+                                    text = "EMAIL",
                                     fontFamily = HelveticaFamilly,
                                 )
                             },
@@ -193,7 +197,7 @@ fun login () {
                             ),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Lock,
+                                    imageVector = Icons.Default.Email,
                                     contentDescription = "Email icon",
 
                                     )
@@ -210,15 +214,95 @@ fun login () {
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                         )
                         Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            text = "Forgot password?",
-                            modifier = Modifier
-                                .align(Alignment.End)
-                                .clickable { /* Handle click */ },
-                            color = Color.Gray,
-                            fontFamily = HelveticaFamilly
+                        Column(
 
-                        )
+                        ){
+                            OutlinedTextField(
+                                value = pass.value,
+                                onValueChange = { pass.value = it },
+                                label = {
+                                    Text(
+                                        text = "PASSWORD",
+                                        fontFamily = HelveticaFamilly,
+                                    )
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 0.dp),
+                                shape = RoundedCornerShape(
+                                    topStart = 10.dp,
+                                    topEnd = 16.dp,
+                                    bottomStart = 16.dp,
+                                    bottomEnd = 16.dp
+                                ),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Lock,
+                                        contentDescription = "Email icon",
+
+                                        )
+                                },
+                                colors = TextFieldDefaults.colors(
+                                    unfocusedLabelColor = Color.White,
+                                    focusedLabelColor = Color.Black,
+                                    unfocusedContainerColor = Color(0xFF2A2A2A),
+                                    focusedContainerColor = Color.White,
+                                    unfocusedLeadingIconColor = Color.White,
+                                    focusedLeadingIconColor = Color.Black,
+                                ),
+                                visualTransformation = PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                isError = !isPasswordVisible.value && confirmpass.value.isEmpty()
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
+                            OutlinedTextField(
+                                value = confirmpass.value,
+                                onValueChange = { confirmpass.value = it },
+                                label = {
+                                    Text(
+                                        text = "confirm password",
+                                        fontFamily = HelveticaFamilly,
+                                    )
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 0.dp),
+                                shape = RoundedCornerShape(
+                                    topStart = 10.dp,
+                                    topEnd = 16.dp,
+                                    bottomStart = 16.dp,
+                                    bottomEnd = 16.dp
+                                ),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Lock,
+                                        contentDescription = "Email icon",
+
+                                        )
+                                },
+                                colors = TextFieldDefaults.colors(
+                                    unfocusedLabelColor = Color.White,
+                                    focusedLabelColor = Color.Black,
+                                    unfocusedContainerColor = Color(0xFF2A2A2A),
+                                    focusedContainerColor = Color.White,
+                                    unfocusedLeadingIconColor = Color.White,
+                                    focusedLeadingIconColor = Color.Black,
+                                ),
+                                visualTransformation = PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                isError = !isPasswordVisible.value && confirmpass.value.isEmpty()
+
+                            )
+                            if(!isPasswordVisible.value && confirmpass.value.isEmpty()){
+                                Text(
+                                    text = "Password dont match",
+                                    color = Color.Red,
+                                    modifier = Modifier.padding(start = 16.dp)
+                                )
+                            }
+
+                        }
+
                     }
 
 
@@ -227,7 +311,7 @@ fun login () {
                 Column(
 
                 ) {
-                    Spacer(modifier = Modifier.height(165.dp))
+                    Spacer(modifier = Modifier.height(375.dp))
                     Button(
                         onClick = { /* Handle sign-in logic here */ },
                         modifier = Modifier
@@ -257,59 +341,6 @@ fun login () {
 
 
                     Spacer(modifier = Modifier.height(85.dp))
-                    Button(
-                        onClick = { /* Handle sign-in logic here */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(75.dp)
-                            .padding(horizontal = 10.dp)
-                            .shadow(
-                                elevation = 10.dp,
-                                shape = RoundedCornerShape(
-                                    topStart = 50.dp,
-                                    topEnd = 50.dp,
-                                    bottomStart = 50.dp,
-                                    bottomEnd = 50.dp
-                                )
-                            ),
-                        shape = RoundedCornerShape(
-                            topStart = 50.dp,
-                            topEnd = 50.dp,
-                            bottomStart = 50.dp,
-                            bottomEnd = 50.dp
-                        ),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White,
-                        ),
-
-                        ) {
-                        Row(
-                            modifier = Modifier.padding(start = 0.dp),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.search,),
-                                contentDescription = "Google Icon",
-                                modifier = Modifier
-                                    .size(40.dp),
-                                tint = Color.Unspecified
-
-                            )
-                            Spacer(Modifier.width(15.dp))
-                            Text(
-                                "SIGN IN WITH GOOGLE",
-                                fontFamily = bigNoodle,
-                                fontSize = 34.sp,
-                                color = Color.Black
-                            )
-                        }
-
-                    }
-
-
-
                 }
             }
 
@@ -323,6 +354,6 @@ fun login () {
 
 @Preview
 @Composable
-fun Previewlogin (){
-    login()
+fun Previewsign (){
+    sign()
 }
