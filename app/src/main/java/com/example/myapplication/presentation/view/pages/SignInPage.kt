@@ -1,66 +1,32 @@
 package com.example.myapplication.presentation.view.pages
-
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.presentation.view.pages.intropage
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.ui.theme.HelveticaFamilly
 import com.example.myapplication.ui.theme.bigNoodle
-import com.example.MyApplication.R
-import kotlinx.coroutines.delay
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun sign () {
+fun sign(onSignUpSuccess: () -> Unit) {
     val email = remember { mutableStateOf("") }
     val pass = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
@@ -313,7 +279,10 @@ fun sign () {
                 ) {
                     Spacer(modifier = Modifier.height(375.dp))
                     Button(
-                        onClick = { /* Handle sign-in logic here */ },
+                        onClick = {
+                            if (email.value.isNotBlank() && pass.value.isNotBlank() && pass.value == confirmpass.value) {
+                                onSignUpSuccess()
+                            } },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp)
@@ -343,17 +312,12 @@ fun sign () {
                     Spacer(modifier = Modifier.height(85.dp))
                 }
             }
-
         }
-
-
     }
 }
-// FINALLY FINISH THIS PAGE YESSSSSSSSSSSSSSSSSS*************
-
 
 @Preview
 @Composable
-fun Previewsign (){
-    sign()
+fun Previewsign() {
+    sign {}
 }
