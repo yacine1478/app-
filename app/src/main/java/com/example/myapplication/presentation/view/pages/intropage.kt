@@ -56,7 +56,7 @@ fun intropage(
 
 @Preview(showBackground = true)
 @Composable
-private fun IntroPagePreview() {
+private fun intropage() {
     intropage(
         title = "SUNSIGHT",
         subtitle = "WELCOME TO NEW FUTURE"

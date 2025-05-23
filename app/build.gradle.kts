@@ -3,15 +3,14 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
 }
-
 android {
-    compileSdk = 36
+    compileSdk = 35
     namespace = "com.example.myapplication"
 
     defaultConfig {
         applicationId = "com.example.MyApplication"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -78,6 +77,7 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.benchmark.macro)
+    implementation(libs.androidx.material3.android)
 
     // Debug Tools
     debugImplementation(libs.androidx.compose.ui.tooling)

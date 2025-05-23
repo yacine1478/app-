@@ -198,6 +198,6 @@ fun WeatherDisplay(weather: WeatherModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewHomepage() {
+fun Homepage() {
     Homepage(WeatherService())
 }
