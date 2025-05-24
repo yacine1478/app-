@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation.view.pages
 
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
@@ -12,10 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Home
+// تم إزالة Icons.Filled.Add, Icons.Filled.Home, Icons.Filled.Person لأنها لم تعد تستخدم في هذا الملف
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -238,49 +235,8 @@ fun GroupsPanelsScreen() {
                     )
                 )
             },
-            bottomBar = {
-                BottomAppBar(
-                    containerColor = MaterialTheme.colorScheme.background, // Match overall background
-                    modifier = Modifier.height(56.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // Home Icon
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                Icons.Filled.Home,
-                                contentDescription = "Home",
-                                tint = MaterialTheme.colorScheme.onBackground, // White
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-
-                        // Add Icon (larger as in png.png)
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                Icons.Filled.Add,
-                                contentDescription = "Add",
-                                tint = MaterialTheme.colorScheme.onBackground, // White
-                                modifier = Modifier.size(36.dp) // Larger size
-                            )
-                        }
-
-                        // Profile Icon (changed from download to person)
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                Icons.Filled.Person,
-                                contentDescription = "Profile",
-                                tint = MaterialTheme.colorScheme.onBackground, // White
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-                    }
-                }
-            }
+            // تم حذف 'bottomBar' بالكامل من هنا
+            // bottomBar = { ... }
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier

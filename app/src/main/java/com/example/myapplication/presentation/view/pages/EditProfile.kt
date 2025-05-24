@@ -1,4 +1,5 @@
 package com.example.myapplication.presentation.view.pages
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +16,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.foundation.rememberScrollState // استيراد جديد
+import androidx.compose.foundation.verticalScroll // استيراد جديد
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditProfileScreen() {
     var username by remember { mutableStateOf("") }
@@ -23,16 +27,19 @@ fun EditProfileScreen() {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
 
+    // إنشاء حالة التمرير
+    val scrollState = rememberScrollState()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF232323))
     ) {
         // الجزء الأبيض السفلي بحواف علوية دائرية
+        // تم إزالة fillMaxHeight(0.62f) للسماح للمحتوى بالتمرير
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.62f)
                 .align(Alignment.BottomCenter)
                 .clip(RoundedCornerShape(topStart = 64.dp, topEnd = 64.dp))
                 .background(Color.White)
@@ -40,7 +47,9 @@ fun EditProfileScreen() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 48.dp),
+                    .padding(top = 48.dp)
+                    .verticalScroll(scrollState) // تطبيق التمرير هنا
+                    .padding(bottom = 64.dp), // إضافة مسافة سفلية لتجنب التداخل مع شريط التنقل (إذا كان موجوداً)
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // USER NAME
@@ -101,6 +110,7 @@ fun EditProfileScreen() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditProfileField(
     value: String,
