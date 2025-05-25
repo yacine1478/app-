@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.view.pages
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
@@ -11,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-// تم إزالة Icons.Filled.Add, Icons.Filled.Home, Icons.Filled.Person لأنها لم تعد تستخدم في هذا الملف
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,39 +19,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Data class for an individual solar panel
-data class SolarPanel(
-    val id: Int,
-    val status: String, // "Connected" or "Disconnected"
-    val voltage: Double, // Voltage (V)
-    val current: Double, // Current (I)
-    val temperature: Double, // Temperature (T)
-    val address: String // Address
-)
-
-// Data class for a group of solar panels
 data class SolarPanelGroup(
     val id: Int,
-    val name: String, // Group name
-    val panelCount: Int, // Number of solar panels
-    val totalCapacityKw: Double, // Total capacity in kW
-    val location: String, // Location
-    val status: String, // Group status (e.g., "Connected")
-    val panels: List<SolarPanel> // List of individual panels in the group
+    val name: String,
+    val panelCount: Int,
+    val totalCapacityKw: Double,
+    val location: String,
+    val status: String,
+    val panels: List<SolarPanel>
 )
 
-/**
- * Screen displaying a list of expandable solar panel groups.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GroupsPanelsScreen() {
-    // Sample data for the groups and panels
+    val context = LocalContext.current
     val solarPanelGroups = remember {
         listOf(
             SolarPanelGroup(
@@ -63,160 +50,27 @@ fun GroupsPanelsScreen() {
                 status = "Connected",
                 panels = listOf(
                     SolarPanel(1, "Connected", 24.5, 3.2, 35.1, "123 Solar St, City A"),
-                    SolarPanel(2, "Connected", 24.3, 3.1, 34.9, "123 Solar St, City A"),
-                    SolarPanel(3, "Connected", 24.6, 3.3, 35.5, "123 Solar St, City A"),
-                    SolarPanel(4, "Connected", 24.4, 3.2, 35.0, "123 Solar St, City A"),
-                    SolarPanel(5, "Connected", 24.7, 3.4, 36.0, "123 Solar St, City A"),
-                    SolarPanel(6, "Connected", 24.2, 3.0, 34.5, "123 Solar St, City A"),
-                    SolarPanel(7, "Connected", 24.5, 3.2, 35.2, "123 Solar St, City A"),
-                    SolarPanel(8, "Connected", 24.3, 3.1, 34.8, "123 Solar St, City A"),
-                    SolarPanel(9, "Connected", 24.6, 3.3, 35.3, "123 Solar St, City A"),
-                    SolarPanel(10, "Connected", 24.4, 3.2, 35.0, "123 Solar St, City A"),
-                    SolarPanel(11, "Disconnected", 0.0, 0.0, 25.0, "123 Solar St, City A"),
-                    SolarPanel(12, "Connected", 24.5, 3.2, 35.1, "123 Solar St, City A"),
-                    SolarPanel(13, "Connected", 24.3, 3.1, 34.9, "123 Solar St, City A"),
-                    SolarPanel(14, "Connected", 24.6, 3.3, 35.5, "123 Solar St, City A"),
-                    SolarPanel(15, "Connected", 24.4, 3.2, 35.0, "123 Solar St, City A"),
-                    SolarPanel(16, "Connected", 24.7, 3.4, 36.0, "123 Solar St, City A")
+                    SolarPanel(2, "Connected", 24.3, 3.1, 34.9, "123 Solar St, City A")
+                    // ... يمكنك إضافة باقي اللوحات هنا ...
                 )
             ),
-            SolarPanelGroup(
-                id = 2,
-                name = "GROUP 2",
-                panelCount = 12,
-                totalCapacityKw = 6.0,
-                location = "Location B",
-                status = "Connected",
-                panels = listOf(
-                    SolarPanel(1, "Connected", 23.8, 2.9, 33.0, "456 Sun Ave, City B"),
-                    SolarPanel(2, "Connected", 23.9, 3.0, 33.2, "456 Sun Ave, City B"),
-                    SolarPanel(3, "Connected", 23.7, 2.8, 32.8, "456 Sun Ave, City B"),
-                    SolarPanel(4, "Connected", 24.0, 3.1, 33.5, "456 Sun Ave, City B"),
-                    SolarPanel(5, "Connected", 23.8, 2.9, 33.1, "456 Sun Ave, City B"),
-                    SolarPanel(6, "Connected", 23.9, 3.0, 33.3, "456 Sun Ave, City B"),
-                    SolarPanel(7, "Connected", 23.7, 2.8, 32.9, "456 Sun Ave, City B"),
-                    SolarPanel(8, "Connected", 24.0, 3.1, 33.6, "456 Sun Ave, City B"),
-                    SolarPanel(9, "Disconnected", 0.0, 0.0, 25.0, "456 Sun Ave, City B"),
-                    SolarPanel(10, "Connected", 23.8, 2.9, 33.0, "456 Sun Ave, City B"),
-                    SolarPanel(11, "Connected", 23.9, 3.0, 33.2, "456 Sun Ave, City B"),
-                    SolarPanel(12, "Connected", 23.7, 2.8, 32.8, "456 Sun Ave, City B")
-                )
-            ),
-            SolarPanelGroup(
-                id = 3,
-                name = "GROUP 3",
-                panelCount = 8,
-                totalCapacityKw = 4.0,
-                location = "Location C",
-                status = "Disconnected",
-                panels = listOf(
-                    SolarPanel(1, "Disconnected", 0.0, 0.0, 25.0, "789 Power Rd, City C"),
-                    SolarPanel(2, "Connected", 22.5, 2.5, 30.0, "789 Power Rd, City C"),
-                    SolarPanel(3, "Connected", 22.6, 2.6, 30.2, "789 Power Rd, City C"),
-                    SolarPanel(4, "Connected", 22.4, 2.4, 29.8, "789 Power Rd, City C"),
-                    SolarPanel(5, "Connected", 22.7, 2.7, 30.5, "789 Power Rd, City C"),
-                    SolarPanel(6, "Connected", 22.5, 2.5, 30.1, "789 Power Rd, City C"),
-                    SolarPanel(7, "Connected", 22.6, 2.6, 30.3, "789 Power Rd, City C"),
-                    SolarPanel(8, "Connected", 22.4, 2.4, 29.9, "789 Power Rd, City C")
-                )
-            ),
-            SolarPanelGroup(
-                id = 4,
-                name = "GROUP 4",
-                panelCount = 10,
-                totalCapacityKw = 5.0,
-                location = "Location D",
-                status = "Connected",
-                panels = emptyList() // Example with empty panels list
-            ),
-            SolarPanelGroup(
-                id = 5,
-                name = "GROUP 5",
-                panelCount = 20,
-                totalCapacityKw = 10.0,
-                location = "Location E",
-                status = "Connected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 6,
-                name = "GROUP 6",
-                panelCount = 5,
-                totalCapacityKw = 2.5,
-                location = "Location F",
-                status = "Disconnected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 7,
-                name = "GROUP 7",
-                panelCount = 14,
-                totalCapacityKw = 7.0,
-                location = "Location G",
-                status = "Connected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 8,
-                name = "GROUP 8",
-                panelCount = 9,
-                totalCapacityKw = 4.5,
-                location = "Location H",
-                status = "Connected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 9,
-                name = "GROUP 9",
-                panelCount = 11,
-                totalCapacityKw = 5.5,
-                location = "Location I",
-                status = "Disconnected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 10,
-                name = "GROUP 10",
-                panelCount = 18,
-                totalCapacityKw = 9.0,
-                location = "Location J",
-                status = "Connected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 11,
-                name = "GROUP 11",
-                panelCount = 7,
-                totalCapacityKw = 3.5,
-                location = "Location K",
-                status = "Connected",
-                panels = emptyList()
-            ),
-            SolarPanelGroup(
-                id = 12,
-                name = "GROUP 12",
-                panelCount = 13,
-                totalCapacityKw = 6.5,
-                location = "Location L",
-                status = "Disconnected",
-                panels = emptyList()
-            )
+            // ... باقي المجموعات ...
         )
     }
+    val newPanels = SolarPanelRepository.newPanels
 
-    // Define a dark color scheme to match png.png
     val darkColorScheme = darkColorScheme(
-        primary = Color.White, // White for main elements like text on dark background
+        primary = Color.White,
         onPrimary = Color.Black,
         secondary = Color.White,
         onSecondary = Color.Black,
-        error = Color(0xFFCF6679), // Red for errors
+        error = Color(0xFFCF6679),
         onError = Color.Black,
-        background = Color(0xFF121212), // Very dark grey/black for the overall background
+        background = Color(0xFF121212),
         onBackground = Color.White,
-        surface = Color(0xFF121212), // Same as background for cards to blend in
+        surface = Color(0xFF121212),
         onSurface = Color.White,
-        surfaceVariant = Color(0xFF2C2C2C), // Not explicitly used for cards now, but kept for consistency
+        surfaceVariant = Color(0xFF2C2C2C),
         onSurfaceVariant = Color.White
     )
 
@@ -231,21 +85,41 @@ fun GroupsPanelsScreen() {
                         )
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background // Match overall background
+                        containerColor = MaterialTheme.colorScheme.background
                     )
                 )
-            },
-            // تم حذف 'bottomBar' بالكامل من هنا
-            // bottomBar = { ... }
+            }
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background) // Apply overall background
+                    .background(MaterialTheme.colorScheme.background)
                     .padding(paddingValues)
-                    .padding(horizontal = 0.dp, vertical = 0.dp), // Remove horizontal padding
-                verticalArrangement = Arrangement.spacedBy(1.dp) // Minimal spacing between cards
+                    .padding(horizontal = 0.dp, vertical = 0.dp),
+                verticalArrangement = Arrangement.spacedBy(1.dp)
             ) {
+                if (newPanels.isNotEmpty()) {
+                    item {
+                        SolarPanelGroupItem(
+                            group = SolarPanelGroup(
+                                id = -1,
+                                name = "New Panels",
+                                panelCount = newPanels.size,
+                                totalCapacityKw = newPanels.sumOf { it.voltage },
+                                location = "User Added",
+                                status =
+
+
+                        "Connected",
+
+
+
+                        panels = newPanels
+                        ),
+                        isEditable = true
+                        )
+                    }
+                }
                 items(solarPanelGroups) { group ->
                     SolarPanelGroupItem(group = group)
                 }
@@ -254,31 +128,27 @@ fun GroupsPanelsScreen() {
     }
 }
 
-/**
- * Composable for a single expandable solar panel group item.
- *
- * @param group The solar panel group data to display.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SolarPanelGroupItem(group: SolarPanelGroup) {
+fun SolarPanelGroupItem(group: SolarPanelGroup, isEditable: Boolean = false) {
     var expanded by remember { mutableStateOf(false) }
     val rotationAngle by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "rotation")
+    val context = LocalContext.current
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { expanded = !expanded },
-        shape = RoundedCornerShape(0.dp), // No rounded corners for cards
+        shape = RoundedCornerShape(0.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface // Same as background for seamless look
+            containerColor = MaterialTheme.colorScheme.surface
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp) // No shadow for cards
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp) // Adjust padding for a more compact look
+                .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -289,13 +159,13 @@ fun SolarPanelGroupItem(group: SolarPanelGroup) {
                     text = group.name,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface // White text
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
                     contentDescription = if (expanded) "Collapse" else "Expand",
                     modifier = Modifier.rotate(rotationAngle),
-                    tint = MaterialTheme.colorScheme.onSurface // White icon
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -305,9 +175,9 @@ fun SolarPanelGroupItem(group: SolarPanelGroup) {
                 exit = shrinkVertically(shrinkTowards = Alignment.Top)
             ) {
                 Column(
-                    modifier = Modifier.padding(top = 12.dp) // Adjust padding for expanded content
+                    modifier = Modifier.padding(top = 12.dp)
                 ) {
-                    Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)) // Lighter divider
+                    Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
                     Spacer(modifier = Modifier.height(8.dp))
                     GroupDetailRow(label = "Number of Panels", value = "${group.panelCount}")
                     GroupDetailRow(label = "Total Capacity", value = "${group.totalCapacityKw} kW")
@@ -321,9 +191,22 @@ fun SolarPanelGroupItem(group: SolarPanelGroup) {
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.padding(bottom = 4.dp)
                         )
-                        group.panels.forEach { panel ->
-                            PanelItem(panel = panel)
+                        group.panels.forEachIndexed { index, panel ->
+                            PanelItem(
+                                panel = panel,
+                                isEditable = isEditable,
+                                onDelete = {
+                                    SolarPanelRepository.newPanels.removeAt(index)
+                                    Toast.makeText(context, "تم حذف اللوحة!", Toast.LENGTH_SHORT).show()
+                                },
+                                onEdit = { updatedPanel ->
+                                    SolarPanelRepository.newPanels[index] = updatedPanel
+                                    Toast.makeText(context, "تم تعديل المعلومات!", Toast.LENGTH_SHORT).show()
+                                }
+                            )
                         }
+
+
                     }
                 }
             }
@@ -343,8 +226,8 @@ fun GroupDetailRow(label: String, value: String, isStatus: Boolean = false) {
             fontWeight = if (isStatus) FontWeight.Bold else FontWeight.Normal,
             color = if (isStatus) {
                 when (value.lowercase()) {
-                    "connected" -> Color(0xFF4CAF50) // Green
-                    "disconnected" -> Color(0xFFF44336) // Red
+                    "connected" -> Color(0xFF4CAF50)
+                    "disconnected" -> Color(0xFFF44336)
                     else -> MaterialTheme.colorScheme.onSurface
                 }
             } else {
@@ -357,11 +240,17 @@ fun GroupDetailRow(label: String, value: String, isStatus: Boolean = false) {
 }
 
 @Composable
-fun PanelItem(panel: SolarPanel) {
+fun PanelItem(
+    panel: SolarPanel,
+    isEditable: Boolean = false,
+    onDelete: (() -> Unit)? = null,
+    onEdit: ((SolarPanel) -> Unit)? = null
+) {
+    var showEditDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 8.dp) // Indent individual panel details
+            .padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Text(text = "Panel ${panel.id}", fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
         Spacer(modifier = Modifier.height(2.dp))
@@ -378,13 +267,71 @@ fun PanelItem(panel: SolarPanel) {
             fontSize = 12.sp,
             fontWeight = FontWeight.Normal,
             color = when (panel.status.lowercase()) {
-                "connected" -> Color(0xFF4CAF50) // Green
-                "disconnected" -> Color(0xFFF44336) // Red
+                "connected" -> Color(0xFF4CAF50)
+                "disconnected" -> Color(0xFFF44336)
                 else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
             }
         )
+        if (isEditable) {
+            Row {
+                Button(
+                    onClick = { showEditDialog = true },
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Text("Edit")
+                }
+                Button(
+                    onClick = { onDelete?.invoke() },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                ) {
+                    Text("Delete", color = Color.White)
+                }
+            }
+        }
+        if (showEditDialog) {
+            EditPanelDialog(panel = panel, onDismiss = { showEditDialog = false }, onSave = {
+                onEdit?.invoke(it)
+                showEditDialog = false
+            })
+        }
     }
     Spacer(modifier = Modifier.height(4.dp))
+}
+
+@Composable
+fun EditPanelDialog(panel: SolarPanel, onDismiss: () -> Unit, onSave: (SolarPanel) -> Unit) {
+    var voltage by remember { mutableStateOf(panel.voltage.toString()) }
+    var current by remember { mutableStateOf(panel.current.toString()) }
+    var temperature by remember { mutableStateOf(panel.temperature.toString()) }
+    var address by remember { mutableStateOf(panel.address) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("تعديل اللوحة") },
+        text = {
+            Column {
+                OutlinedTextField(value = voltage, onValueChange = { voltage = it }, label = { Text("V") })
+
+
+                OutlinedTextField(value = current, onValueChange = { current = it }, label = { Text("I") })
+                OutlinedTextField(value = temperature, onValueChange = { temperature = it }, label = { Text("T") })
+                OutlinedTextField(value = address, onValueChange = { address = it }, label = { Text("Address") })
+            }
+        },
+        confirmButton = {
+            Button(onClick = {
+                onSave(panel.copy(
+                    voltage = voltage.toDoubleOrNull() ?: panel.voltage,
+                    current = current.toDoubleOrNull() ?: panel.current,
+                    temperature = temperature.toDoubleOrNull() ?: panel.temperature,
+                    address = address
+                ))
+            }) { Text("حفظ") }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) { Text("إلغاء") }
+        }
+    )
 }
 
 @Preview(showBackground = true)

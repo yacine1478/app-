@@ -1,4 +1,5 @@
 package com.example.myapplication.presentation.view.pages
+
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,13 +11,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// غيّر اسم الكلاس لتجنب التعارض مع الدالة
 class AddSolarPanelActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +101,8 @@ fun AddSolarPanelScreen() {
                     val gmmIntentUri = Uri.parse("geo:0,0?q=solar+panel+location")
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage("com.google.android.apps.maps")
+
+
                     context.startActivity(mapIntent)
                     locationSet = true
                     locationUri = gmmIntentUri.toString()
@@ -125,6 +123,12 @@ fun AddSolarPanelScreen() {
                 saveSolarPanel(
                     context, group, voltage, current, temperature, locationUri
                 )
+                // إعادة تعيين الحقول بعد الحفظ
+                group = ""
+                voltage = ""
+                current = ""
+                temperature = ""
+                locationUri = ""
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,9 +148,17 @@ fun saveSolarPanel(
     temperature: String,
     location: String
 ) {
-    // TODO: استخدم Retrofit أو OkHttp لإرسال البيانات إلى PHP API في XAMPP
+    SolarPanelRepository.newPanels.add(
+        SolarPanel(
+            id = SolarPanelRepository.newPanels.size + 1,
+            status = "Connected",
+            voltage = voltage.toDoubleOrNull() ?: 0.0,
+            current = current.toDoubleOrNull() ?: 0.0,
+            temperature = temperature.toDoubleOrNull() ?: 0.0,
+            address = location
+        )
+    )
 
-    // إظهار Toast notification عند النجاح
     Toast.makeText(
         context,
         "تمت إضافة اللوحة الشمسية الجديدة بنجاح!",
