@@ -42,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 // استبدل الخطوط بما يناسبك
 val bigNoodle = FontFamily.Default
 val HelveticaFamilly = FontFamily.Default
@@ -53,8 +54,11 @@ fun login(
     onSignInClick: () -> Unit,
     onGoogleLoginClick: () -> Unit
 ) {
+
     val email = remember { mutableStateOf("") }
     val pass = remember { mutableStateOf("") }
+
+
 
     Column(
         modifier = Modifier

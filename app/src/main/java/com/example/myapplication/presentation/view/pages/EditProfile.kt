@@ -16,18 +16,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.foundation.rememberScrollState // استيراد جديد
-import androidx.compose.foundation.verticalScroll // استيراد جديد
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditProfileScreen() {
-    var username by remember { mutableStateOf("") }
+fun EditProfileScreen(
+    currentUsername: String = "",
+    onSaveProfile: (String) -> Unit = {}
+) {
+    var username by remember { mutableStateOf(currentUsername) }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
 
-    // إنشاء حالة التمرير
+
     val scrollState = rememberScrollState()
 
     Box(
@@ -35,8 +38,8 @@ fun EditProfileScreen() {
             .fillMaxSize()
             .background(Color(0xFF232323))
     ) {
-        // الجزء الأبيض السفلي بحواف علوية دائرية
-        // تم إزالة fillMaxHeight(0.62f) للسماح للمحتوى بالتمرير
+
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,11 +51,11 @@ fun EditProfileScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 48.dp)
-                    .verticalScroll(scrollState) // تطبيق التمرير هنا
-                    .padding(bottom = 64.dp), // إضافة مسافة سفلية لتجنب التداخل مع شريط التنقل (إذا كان موجوداً)
+                    .verticalScroll(scrollState)
+                    .padding(bottom = 64.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // USER NAME
+
                 EditProfileField(
                     value = username,
                     onValueChange = { username = it },
@@ -60,7 +63,7 @@ fun EditProfileScreen() {
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // EMAIL
+
                 EditProfileField(
                     value = email,
                     onValueChange = { email = it },
@@ -68,7 +71,7 @@ fun EditProfileScreen() {
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // PASSWORD
+
                 EditProfileField(
                     value = password,
                     onValueChange = { password = it },
@@ -77,7 +80,7 @@ fun EditProfileScreen() {
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // CONFIRM PASSWORD
+
                 EditProfileField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
@@ -86,9 +89,13 @@ fun EditProfileScreen() {
                 )
                 Spacer(modifier = Modifier.height(40.dp))
 
-                // زر EDIT PROFIL
+
                 Button(
-                    onClick = { /* تنفيذ التعديل */ },
+                    onClick = {
+                        if (username.isNotBlank()) {
+                            onSaveProfile(username)
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .height(56.dp),

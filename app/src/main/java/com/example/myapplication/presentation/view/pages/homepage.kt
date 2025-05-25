@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-
+import com.example.myapplication.presentation.view.pages.PreviewFakeHomeScreen
 class HomepageActivity : ComponentActivity() {
     private lateinit var weatherService: WeatherService
 
@@ -200,4 +200,5 @@ fun WeatherDisplay(weather: WeatherModel) {
 @Composable
 fun Homepage() {
     Homepage(WeatherService())
+
 }

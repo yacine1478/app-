@@ -95,7 +95,7 @@ fun sign(onSignUpSuccess: () -> Unit) {
                             .height(65.dp)
                             .padding(horizontal = 10.dp), // Add vertical padding
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Email,
+                            keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next // Or ImeAction.Done depending on flow
                         ),
                         keyboardActions = KeyboardActions(
@@ -143,6 +143,7 @@ fun sign(onSignUpSuccess: () -> Unit) {
                         modifier = Modifier.fillMaxWidth()
                             .padding(horizontal = 10.dp)
                     ) {
+
                         OutlinedTextField(
                             value = email.value,
                             onValueChange = { email.value = it },
@@ -150,24 +151,22 @@ fun sign(onSignUpSuccess: () -> Unit) {
                                 Text(
                                     text = "EMAIL",
                                     fontFamily = HelveticaFamilly,
+                                    // Optional label color
                                 )
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 0.dp),
-                            shape = RoundedCornerShape(
-                                topStart = 10.dp,
-                                topEnd = 16.dp,
-                                bottomStart = 16.dp,
-                                bottomEnd = 16.dp
+                                .height(65.dp)
+                                .padding(horizontal = 10.dp), // Add vertical padding
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Text,
+                                imeAction = ImeAction.Next // Or ImeAction.Done depending on flow
                             ),
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Default.Email,
-                                    contentDescription = "Email icon",
-
-                                    )
-                            },
+                            keyboardActions = KeyboardActions(
+                                onNext = { /* Move focus to next field */ },
+                                onDone = { /* Submit form or hide keyboard */ }
+                            ),
+                            singleLine = true, // Important for email input
                             colors = TextFieldDefaults.colors(
                                 unfocusedLabelColor = Color.White,
                                 focusedLabelColor = Color.Black,
@@ -176,9 +175,21 @@ fun sign(onSignUpSuccess: () -> Unit) {
                                 unfocusedLeadingIconColor = Color.White,
                                 focusedLeadingIconColor = Color.Black,
                             ),
-                            visualTransformation = PasswordVisualTransformation(),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                        )
+                            shape = RoundedCornerShape(
+                                topStart = 16.dp,
+                                topEnd = 16.dp,
+                                bottomStart = 16.dp,
+                                bottomEnd = 16.dp
+                            ), // Rounded corners
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.AccountCircle,
+                                    contentDescription = "Email icon",
+
+                                    )
+                            },
+
+                            )
                         Spacer(modifier = Modifier.height(10.dp))
                         Column(
 

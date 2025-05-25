@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ProfilPreview(
+    username: String = "YACINE AHMID",
     onEditProfile: () -> Unit,
     onSolarGroups: () -> Unit,
     onMarketShops: () -> Unit
@@ -49,7 +50,7 @@ fun ProfilPreview(
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = "YACINE AHMID",
+                    text = username,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
@@ -96,7 +97,7 @@ fun ProfilPreview(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Market Shops
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()

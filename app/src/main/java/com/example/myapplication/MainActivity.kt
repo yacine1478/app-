@@ -24,7 +24,7 @@ import com.example.myapplication.presentation.view.pages.WeatherDisplay
 import com.example.myapplication.presentation.view.pages.WeatherModel
 import com.example.myapplication.presentation.view.pages.AddSolarPanelScreen
 import com.example.myapplication.presentation.view.pages.BottomNavigationBar
-import androidx.compose.material3.ExperimentalMaterial3Api // لإصلاح تحذير @OptIn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import com.example.myapplication.presentation.view.pages.GroupsPanelsScreen
 
 class MainActivity : ComponentActivity() {
@@ -36,20 +36,22 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class) // أضف هذا لتجنب تحذيرات Scaffold
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavigator() {
     var currentScreen by remember { mutableStateOf("intro") }
     // استخدم هذه الحالة لتحديد الشاشة المختارة في شريط التنقل السفلي
     var selectedBottomNavItem by remember { mutableStateOf("home") }
+    // حالة لحفظ اسم المستخدم
+    var currentUsername by remember { mutableStateOf("YACINE AHMID") }
 
-    // نقل Scaffold مع BottomNavigationBar إلى مستوى أعلى ليغلف الشاشات التي تحتاجها
+
     Scaffold(
         bottomBar = {
-            // أظهر الشريط السفلي فقط عندما يكون في الشاشات الرئيسية
+
             if (currentScreen == "home" || currentScreen == "add" || currentScreen == "profile" || currentScreen == "market" || currentScreen == "GroupsPanels" || currentScreen == "editProfile" ) {
                 BottomNavigationBar(
-                    selectedScreen = selectedBottomNavItem, // استخدم الحالة الجديدة هنا
+                    selectedScreen = selectedBottomNavItem,
                     onHomeClick = {
                         currentScreen = "home"
                         selectedBottomNavItem = "home"
@@ -62,22 +64,22 @@ fun AppNavigator() {
                         currentScreen = "profile"
                         selectedBottomNavItem = "profile"
                     }
-                    // يمكنك إضافة المزيد من أزرار التنقل هنا وتحديث currentScreen و selectedBottomNavItem
+
                 )
             }
         }
     ) { innerPadding ->
-        // Box لتطبيق الـ padding الذي يوفره Scaffold
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding) // تطبيق المساحات الداخلية للحفاظ على المحتوى بعيدًا عن الـ bottomBar
+                .padding(innerPadding)
         ) {
             when (currentScreen) {
                 "intro" -> {
                     LaunchedEffect(Unit) {
                         delay(2000)
-                        currentScreen = "login" // التغيير هنا: ينتقل إلى login
+                        currentScreen = "login"
                     }
                     intropage(
                         title = "SUNSIGHT",
@@ -88,21 +90,21 @@ fun AppNavigator() {
                     login(
                         onLoginSuccess = {
                             currentScreen = "home"
-                            selectedBottomNavItem = "home" // بعد تسجيل الدخول بنجاح، انتقل إلى home واضبط العنصر المحدد
+                            selectedBottomNavItem = "home"
                         },
                         onSignInClick = {
-                            currentScreen = "sign" // الانتقال إلى شاشة التسجيل
+                            currentScreen = "sign"
                         },
-                        onGoogleLoginClick = { /* نفذ تسجيل دخول Google هنا */ }
+                        onGoogleLoginClick = {}
                     )
                 }
                 "sign" -> {
                     sign(onSignUpSuccess = {
-                        currentScreen = "login" // بعد التسجيل بنجاح، ارجع إلى شاشة تسجيل الدخول
+                        currentScreen = "login"
                     })
                 }
                 "home" -> {
-                    // لم يعد HomepageWithProfileNav يحتاج إلى Scaffold داخليًا
+
                     HomepageContent(
                         onProfileClick = {
                             currentScreen = "profile"
@@ -112,13 +114,20 @@ fun AppNavigator() {
                 }
                 "profile" -> {
                     ProfilPreview(
+                        username = currentUsername,
                         onEditProfile = { currentScreen = "editProfile" },
                         onSolarGroups = { currentScreen = "GroupsPanels"},
                         onMarketShops = { currentScreen = "market" }
                     )
                 }
                 "editProfile" -> {
-                    EditProfileScreen()
+                    EditProfileScreen(
+                        currentUsername = currentUsername,
+                        onSaveProfile = { newUsername ->
+                            currentUsername = newUsername
+                            currentScreen = "profile"
+                        }
+                    )
                 }
                 "market" -> {
                     MarketShope()
@@ -134,7 +143,7 @@ fun AppNavigator() {
     }
 }
 
-// تم فصل محتوى Homepage ليتناسب مع الهيكل الجديد
+
 @Composable
 fun HomepageContent(onProfileClick: () -> Unit) {
     val weatherService = remember { WeatherService() }

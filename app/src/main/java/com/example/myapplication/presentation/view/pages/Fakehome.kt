@@ -9,7 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WbSunny // أيقونة الشمس
+import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// لون الخلفية الرئيسي المشابه للصورة
+
 val DarkBackground = Color(0xFF222222)
 val CardBackground = Color.White
 val TextColor = Color.Black
@@ -36,14 +36,14 @@ fun FakeHomeScreen() {
             .background(DarkBackground)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(24.dp) // مسافة بين البطاقات
+        verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        Spacer(modifier = Modifier.height(32.dp)) // مسافة من الأعلى
+        Spacer(modifier = Modifier.height(32.dp))
 
-        // البطاقة العلوية (الشمس ودرجة الحرارة)
+
         SunWeatherCard()
 
-        // البطاقة السفلية (عداد الطاقة)
+
         PowerLeftCard()
     }
 }
@@ -53,10 +53,10 @@ fun SunWeatherCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(IntrinsicSize.Min), // يسمح بتحديد الارتفاع بناءً على المحتوى
+            .height(IntrinsicSize.Min),
         shape = RoundedCornerShape(20.dp),
         backgroundColor = CardBackground,
-        elevation = 0.dp // لا يوجد ظل في الصورة الأصلية
+        elevation = 0.dp
     ) {
         Row(
             modifier = Modifier
@@ -73,7 +73,7 @@ fun SunWeatherCard() {
                     imageVector = Icons.Default.WbSunny,
                     contentDescription = "Sun Icon",
                     tint = TextColor,
-                    modifier = Modifier.size(70.dp) // حجم أيقونة الشمس
+                    modifier = Modifier.size(70.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -89,7 +89,7 @@ fun SunWeatherCard() {
                 )
             }
 
-            Spacer(modifier = Modifier.width(20.dp)) // مسافة بين الأقسام
+            Spacer(modifier = Modifier.width(20.dp))
 
             Column(
                 horizontalAlignment = Alignment.End,
@@ -112,7 +112,7 @@ fun SunWeatherCard() {
                     )
                 }
                 Text(
-                    text = "CHECK YOUR SOLARS PANNALS ^", // قد تحتاج لتعديل هذه الأيقونة
+                    text = "CHECK YOUR SOLARS PANNALS ^",
                     color = TextColor,
                     fontSize = 12.sp
                 )
@@ -140,21 +140,21 @@ fun PowerLeftCard() {
         ) {
             Box(
                 modifier = Modifier
-                    .size(250.dp), // حجم الدائرة
+                    .size(250.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularPowerIndicator(
-                    percentage = 0.75f, // 75% من الطاقة
+                    percentage = 0.75f,
                     radius = 120.dp,
                     strokeWidth = 15.dp,
                     foregroundColor = TextColor,
-                    backgroundColor = Color.LightGray.copy(alpha = 0.5f) // لون الدائرة الخلفية
+                    backgroundColor = Color.LightGray.copy(alpha = 0.5f)
                 )
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = "75",
                         color = TextColor,
-                        fontSize = 90.sp, // حجم كبير للرقم
+                        fontSize = 90.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
@@ -164,20 +164,19 @@ fun PowerLeftCard() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(40.dp)) // مسافة بين الدائرة والنقاط
+            Spacer(modifier = Modifier.height(40.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // النقطة الأولى (ممتلئة)
+
                 CircleIndicator(selected = true)
                 Spacer(modifier = Modifier.width(8.dp))
-                // النقطة الثانية (فارغة)
+
                 CircleIndicator(selected = false)
                 Spacer(modifier = Modifier.width(8.dp))
-                // النقطة الثالثة (فارغة)
                 CircleIndicator(selected = false)
             }
         }
@@ -208,21 +207,21 @@ fun CircularPowerIndicator(
             style = Stroke(width = strokeWidth.toPx())
         )
 
-        // رسم التقدم (الجزء الممتلئ)
+
         drawArc(
             color = foregroundColor,
-            startAngle = -90f, // ابدأ من الأعلى
+            startAngle = -90f,
             sweepAngle = 360 * percentage,
             useCenter = false,
-            style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round) // نهاية مستديرة
+            style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
         )
     }
 }
 
-@Preview(showBackground = true, widthDp = 360, heightDp = 700) // معاينة بالحجم التقريبي للهاتف
+@Preview(showBackground = true, widthDp = 360, heightDp = 700)
 @Composable
 fun PreviewFakeHomeScreen() {
-    MaterialTheme { // استخدم MaterialTheme لتطبيق سمات المواد الأساسية
+    MaterialTheme {
         FakeHomeScreen()
     }
 }
