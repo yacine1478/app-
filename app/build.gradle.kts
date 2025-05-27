@@ -66,6 +66,17 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+    implementation("mysql:mysql-connector-java:8.0.28")
+    implementation("com.zaxxer:HikariCP:5.0.1") // ل connection pooling
+    implementation("org.jetbrains.exposed:exposed-core:0.41.1") // للإصدارات القديمة
+    implementation("org.jetbrains.exposed:exposed-core:0.44.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.44.1")
+
+    // MySQL Connector
+    implementation("mysql:mysql-connector-java:8.0.33")
 
     // Compose
     implementation(libs.androidx.activity.compose)
@@ -78,6 +89,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.room.common.jvm)
+    implementation(libs.androidx.room.compiler)
 
     // Debug Tools
     debugImplementation(libs.androidx.compose.ui.tooling)

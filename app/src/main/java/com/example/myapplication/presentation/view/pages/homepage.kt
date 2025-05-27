@@ -55,7 +55,7 @@ fun Homepage(weatherService: WeatherService) {
                         selectedScreen = currentScreen,
                         onHomeClick = { currentScreen = "home" },
                         onAddClick = { currentScreen = "add" },
-                        onProfileClick = { /* يمكنك إضافة شاشة البروفايل لاحقًا */ }
+                        onProfileClick = {  }
                     )
                 }
             ) { innerPadding ->
@@ -85,8 +85,8 @@ fun Homepage(weatherService: WeatherService) {
                     BottomNavigationBar(
                         selectedScreen = currentScreen,
                         onHomeClick = { currentScreen = "home" },
-                        onAddClick = { /* بالفعل هنا */ },
-                        onProfileClick = { /* يمكنك إضافة شاشة البروفايل لاحقًا */ }
+                        onAddClick = {   },
+                        onProfileClick = {  }
                     )
                 }
             ) { innerPadding ->
@@ -181,7 +181,7 @@ fun BottomNavigationBar(
         )
     }
 }
-// مثال لعرض بيانات الطقس
+
 @Composable
 fun WeatherDisplay(weather: WeatherModel) {
     Column(

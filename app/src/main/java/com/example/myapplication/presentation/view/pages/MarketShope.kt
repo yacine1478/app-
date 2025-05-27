@@ -38,7 +38,7 @@ fun MarketShope() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Amazon Icon (رسم يدوي)
+
             Box(
                 modifier = Modifier
                     .size(140.dp)
@@ -61,7 +61,7 @@ fun MarketShope() {
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
-                    // رسم الابتسامة
+
                     Canvas(modifier = Modifier.size(60.dp, 20.dp)) {
                         drawArc(
                             color = Color.White,
@@ -72,7 +72,7 @@ fun MarketShope() {
                             size = androidx.compose.ui.geometry.Size(size.width, size.height),
                             style = Stroke(width = 6f)
                         )
-                        // السهم
+
                         drawLine(
                             color = Color.White,
                             start = androidx.compose.ui.geometry.Offset(size.width * 0.8f, size.height * 0.7f),
@@ -85,7 +85,7 @@ fun MarketShope() {
 
             Spacer(modifier = Modifier.height(80.dp))
 
-            // AliExpress Icon (رسم يدوي)
+
             Box(
                 modifier = Modifier
                     .size(110.dp)
@@ -100,21 +100,21 @@ fun MarketShope() {
                 contentAlignment = Alignment.Center
             ) {
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    // الجزء البرتقالي
+
                     drawRoundRect(
                         color = Color(0xFFFFA000),
                         topLeft = androidx.compose.ui.geometry.Offset(0f, size.height * 0.18f),
                         size = androidx.compose.ui.geometry.Size(size.width, size.height * 0.82f),
                         cornerRadius = androidx.compose.ui.geometry.CornerRadius(24f, 24f)
                     )
-                    // الجزء الأحمر العلوي
+
                     drawRoundRect(
                         color = Color(0xFFE53935),
                         topLeft = androidx.compose.ui.geometry.Offset(0f, 0f),
                         size = androidx.compose.ui.geometry.Size(size.width, size.height * 0.22f),
                         cornerRadius = androidx.compose.ui.geometry.CornerRadius(18f, 18f)
                     )
-                    // الإطار الأسود
+
                     drawRoundRect(
                         color = Color.Black,
                         topLeft = androidx.compose.ui.geometry.Offset(0f, 0f),
@@ -122,7 +122,7 @@ fun MarketShope() {
                         cornerRadius = androidx.compose.ui.geometry.CornerRadius(24f, 24f),
                         style = Stroke(width = 6f)
                     )
-                    // مقبض الحقيبة
+
                     drawArc(
                         color = Color.White,
                         startAngle = 200f,

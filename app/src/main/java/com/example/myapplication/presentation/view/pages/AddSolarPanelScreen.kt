@@ -123,7 +123,6 @@ fun AddSolarPanelScreen() {
                 saveSolarPanel(
                     context, group, voltage, current, temperature, locationUri
                 )
-                // إعادة تعيين الحقول بعد الحفظ
                 group = ""
                 voltage = ""
                 current = ""

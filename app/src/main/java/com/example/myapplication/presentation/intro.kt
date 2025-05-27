@@ -1,4 +1,4 @@
-// presentation/Introscreen.kt
+
 package com.example.myapplication.presentation
 
 import androidx.compose.animation.AnimatedVisibility
@@ -29,9 +29,9 @@ fun Introscreen(
     var visible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        delay(300) // Initial delay before animation starts
+        delay(300)
         visible = true
-        delay(2000) // Delay before auto-navigation
+        delay(2000)
         onNavigateForward()
     }
 

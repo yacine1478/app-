@@ -40,9 +40,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigator() {
     var currentScreen by remember { mutableStateOf("intro") }
-    // استخدم هذه الحالة لتحديد الشاشة المختارة في شريط التنقل السفلي
     var selectedBottomNavItem by remember { mutableStateOf("home") }
-    // حالة لحفظ اسم المستخدم
     var currentUsername by remember { mutableStateOf("YACINE AHMID") }
 
 

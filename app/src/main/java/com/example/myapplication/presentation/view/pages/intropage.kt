@@ -1,4 +1,4 @@
-// presentation/view/pages/intropage.kt
+
 package com.example.myapplication.presentation.view.pages
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,14 +24,14 @@ fun intropage(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF232323)), // أسود غامق مثل الصورة
+            .background(Color(0xFF232323)),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // إذا كان لديك صورة شعار الشمس أضفها هنا:
-            // Image(painter = painterResource(id = R.drawable.sun_logo), contentDescription = null, modifier = Modifier.size(120.dp))
+
+
 
             Text(
                 text = title,

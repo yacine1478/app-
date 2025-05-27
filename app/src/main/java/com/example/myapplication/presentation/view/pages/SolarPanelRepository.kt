@@ -9,7 +9,12 @@ data class SolarPanel(
     val current: Double,
     val temperature: Double,
     val address: String
-)
+) {
+    val groupId: Int
+        get() {
+            TODO()
+        }
+}
 
 object SolarPanelRepository {
     val newPanels = mutableStateListOf<SolarPanel>()

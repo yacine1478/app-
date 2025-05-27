@@ -19,17 +19,8 @@ fun AppNavigator() {
         composable(Routes.INTRO_SCREEN) {
             Introscreen(
                 onNavigateForward = {
-                    // Example navigation:
-                    // navController.navigate(Routes.HOME_SCREEN)
                 }
             )
         }
-
-        // Add other screens here:
-        /*
-        composable(Routes.HOME_SCREEN) {
-            HomeScreen()
-        }
-        */
     }
 }

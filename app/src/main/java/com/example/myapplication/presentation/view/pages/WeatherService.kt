@@ -6,7 +6,7 @@ import java.net.URL
 
 class WeatherService {
 
-    private val apiKey = "2e104ce9c78536cbb4b197ffeb8c9f11" // Replace with your actual API key
+    private val apiKey = "2e104ce9c78536cbb4b197ffeb8c9f11"
     private val baseUrl = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={2e104ce9c78536cbb4b197ffeb8c9f11}"
 
     fun getCurrentWeather(location: String, callback: (WeatherModel?) -> Unit) {

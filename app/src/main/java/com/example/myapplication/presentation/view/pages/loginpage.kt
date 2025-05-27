@@ -289,11 +289,11 @@ fun login(
     }
 }
 
-// أيقونة Google مرسومة بالكود
+
 @Composable
 fun GoogleIcon(modifier: Modifier = Modifier) {
     Canvas(modifier = modifier.size(40.dp)) {
-        // الأزرق
+
         drawArc(
             color = Color(0xFF4285F4),
             startAngle = 180f,
@@ -301,7 +301,7 @@ fun GoogleIcon(modifier: Modifier = Modifier) {
             useCenter = false,
             style = Stroke(width = 8f)
         )
-        // الأحمر
+
         drawArc(
             color = Color(0xFFEA4335),
             startAngle = 225f,
@@ -309,7 +309,7 @@ fun GoogleIcon(modifier: Modifier = Modifier) {
             useCenter = false,
             style = Stroke(width = 8f)
         )
-        // الأصفر
+
         drawArc(
             color = Color(0xFFFBBC05),
             startAngle = 270f,
@@ -317,7 +317,7 @@ fun GoogleIcon(modifier: Modifier = Modifier) {
             useCenter = false,
             style = Stroke(width = 8f)
         )
-        // الأخضر
+
         drawArc(
             color = Color(0xFF34A853),
             startAngle = 315f,

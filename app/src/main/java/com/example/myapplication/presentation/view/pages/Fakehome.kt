@@ -200,7 +200,6 @@ fun CircularPowerIndicator(
     backgroundColor: Color
 ) {
     Canvas(modifier = Modifier.size(radius * 2)) {
-        // رسم الدائرة الخلفية الكاملة
         drawCircle(
             color = backgroundColor,
             radius = radius.toPx(),

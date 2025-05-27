@@ -30,7 +30,7 @@ fun ProfilPreview(
             .background(Color(0xFF232323))
             .padding(horizontal = 24.dp, vertical = 32.dp)
     ) {
-        // صورة البروفايل والاسم
+
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -73,7 +73,7 @@ fun ProfilPreview(
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Solar Panals Groups
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
